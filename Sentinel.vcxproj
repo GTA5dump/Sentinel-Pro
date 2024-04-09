@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2c80c79c-dbb6-4493-88cd-b2c1fbefceea}</ProjectGuid>
+    <RootNamespace>Sentinel</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Binaries\</OutDir>
+    <IntDir>$(SolutionDir)Binaries\Intermediate\</IntDir>
+    <IncludePath>$(SolutionDir)Libraries\Zydis;$(SolutionDir)Libraries;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)Libraries;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CURL_STATICLIB;ZYDIS_STATIC_BUILD;WINDOWS_IGNORE_PACKING_MISMATCH;_CRT_SECURE_NO_WARNINGS;NDEBUG;SENTINEL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/MP6 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>DbgHelp.lib;winmm.lib;AsyncLogger\AsyncLogger.lib;Zydis\Zydis.lib;Zydis\Zycore.lib;WorldShield\WorldShield.lib;CURL\libCURL.lib;ws2_32.lib;Normaliz.lib;Crypt32.lib;Wldap32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3dcompiler.lib;MinHook\MinHook.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="Features\FeatureManager.cpp" />
+    <ClCompile Include="Features\Misc.cpp" />
+    <ClCompile Include="Features\Network.cpp" />
+    <ClCompile Include="Features\Players.cpp" />
+    <ClCompile Include="Features\Self.cpp" />
+    <ClCompile Include="Features\Vehicle.cpp" />
+    <ClCompile Include="Features\Weapon.cpp" />
+    <ClCompile Include="GTA\Invoker\CrossMap.cpp" />
+    <ClCompile Include="GTA\Invoker\Invoker.cpp" />
+    <ClCompile Include="GTA\Script\Script.cpp" />
+    <ClCompile Include="GTA\Script\ScriptFunction.cpp" />
+    <ClCompile Include="GTA\Script\ScriptGlobal.cpp" />
+    <ClCompile Include="GTA\Script\ScriptHook.cpp" />
+    <ClCompile Include="GTA\Script\ScriptLocal.cpp" />
+    <ClCompile Include="GTA\Script\ScriptManager.cpp" />
+    <ClCompile Include="GTA\Script\ScriptQueue.cpp" />
+    <ClCompile Include="GUI\Elements.cpp" />
+    <ClCompile Include="GUI\GUI.cpp" />
+    <ClCompile Include="GUI\Menu\Menu.cpp" />
+    <ClCompile Include="GUI\Overlays\Overlays.cpp" />
+    <ClCompile Include="GUI\Submenus\MiscSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\NetworkSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\PlayersSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\ProtectionSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\SelfSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\SpawnerSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\TeleportSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\VehicleSubmenu.cpp" />
+    <ClCompile Include="GUI\Submenus\WeaponSubmenu.cpp" />
+    <ClCompile Include="Hooking\DetourHook.cpp" />
+    <ClCompile Include="Hooking\Hooking.cpp" />
+    <ClCompile Include="Hooking\IATHook.cpp" />
+    <ClCompile Include="Hooking\NativeHooks.cpp" />
+    <ClCompile Include="Hooking\VMTHook.cpp" />
+    <ClCompile Include="Hooks\GTA\AnimTaskCrashPatch.cpp" />
+    <ClCompile Include="Hooks\GTA\AssignPhysicalIndex.cpp" />
+    <ClCompile Include="Hooks\GTA\BDSMCrashPatch.cpp" />
+    <ClCompile Include="Hooks\GTA\CanApplyData.cpp" />
+    <ClCompile Include="Hooks\GTA\ReceivedClone.cpp" />
+    <ClCompile Include="Hooks\GTA\SendNetworkEvent.cpp" />
+    <ClCompile Include="Hooks\GTA\UpdatePresenceAttribute.cpp" />
+    <ClCompile Include="Hooks\GTA\FallTaskConstructor.cpp" />
+    <ClCompile Include="Hooks\GTA\FragmentCrashPatch.cpp" />
+    <ClCompile Include="Hooks\GTA\InfiniteTrainCrashPatch.cpp" />
+    <ClCompile Include="Hooks\GTA\InitializeNativeTables.cpp" />
+    <ClCompile Include="Hooks\GTA\InvalidDecalCrashPatch.cpp" />
+    <ClCompile Include="Hooks\GTA\KanyeCrashPatch.cpp" />
+    <ClCompile Include="Hooks\GTA\NetworkPlayerManager.cpp" />
+    <ClCompile Include="Hooks\GTA\NTQueryVirtualMemory.cpp" />
+    <ClCompile Include="Hooks\GTA\ReceivedEventHandler.cpp" />
+    <ClCompile Include="Hooks\GTA\ReceivePickup.cpp" />
+    <ClCompile Include="Hooks\GTA\ScriptVM.cpp" />
+    <ClCompile Include="Hooks\GTA\SendChatMessage.cpp" />
+    <ClCompile Include="Hooks\GTA\TaskJumpConstructor.cpp" />
+    <ClCompile Include="Hooks\GTA\WritePedCreationDataNode.cpp" />
+    <ClCompile Include="Hooks\GTA\WritePedMovementDataNode.cpp" />
+    <ClCompile Include="Hooks\GTA\WritePedOrientationDataNode.cpp" />
+    <ClCompile Include="Hooks\Native\DisableControlAction.cpp" />
+    <ClCompile Include="Hooks\Native\HudForceWeaponWheel.cpp" />
+    <ClCompile Include="Hooks\Native\SetCurrentPedWeapon.cpp" />
+    <ClCompile Include="Hooks\Native\SetWarningMessageWithHeader.cpp" />
+    <ClCompile Include="Hooks\Native\Wait.cpp" />
+    <ClCompile Include="Hooks\SwapChain\Present.cpp" />
+    <ClCompile Include="Hooks\SwapChain\ResizeBuffers.cpp" />
+    <ClCompile Include="Hooks\Window\WndProc.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGui\imgui_tables.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Logger\ExceptionHandler.cpp" />
+    <ClCompile Include="Logger\Logger.cpp" />
+    <ClCompile Include="Logger\StackTrace.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Memory\Batch.cpp" />
+    <ClCompile Include="Memory\BytePatch.cpp" />
+    <ClCompile Include="Memory\Module.cpp" />
+    <ClCompile Include="Memory\Pattern.cpp" />
+    <ClCompile Include="Memory\Range.cpp" />
+    <ClCompile Include="Pointers\Pointers.cpp" />
+    <ClCompile Include="Renderer\Renderer.cpp" />
+    <ClCompile Include="Services\Friends\FriendsService.cpp" />
+    <ClCompile Include="Services\Players\PlayerService.cpp" />
+    <ClCompile Include="Services\Players\PlayerStruct.cpp" />
+    <ClCompile Include="Services\ScriptPatcher\ScriptPatch.cpp" />
+    <ClCompile Include="Services\ScriptPatcher\ScriptPatcher.cpp" />
+    <ClCompile Include="Utility\Joaat.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.hpp" />
+    <ClInclude Include="Features\AngryPlanes.hpp" />
+    <ClInclude Include="Features\FeatureManager.hpp" />
+    <ClInclude Include="Features\Misc.hpp" />
+    <ClInclude Include="Features\Network.hpp" />
+    <ClInclude Include="Features\Players.hpp" />
+    <ClInclude Include="Features\ProtectionScript.hpp" />
+    <ClInclude Include="Features\Self.hpp" />
+    <ClInclude Include="Features\Vehicle.hpp" />
+    <ClInclude Include="Features\Weapon.hpp" />
+    <ClInclude Include="Fonts\Pricedown.hpp" />
+    <ClInclude Include="Fonts\Icons.hpp" />
+    <ClInclude Include="Fonts\RobotoBold.hpp" />
+    <ClInclude Include="Fonts\RobotoMedium.hpp" />
+    <ClInclude Include="GTA\datBitBuffer.hpp" />
+    <ClInclude Include="GTA\Crashes.hpp" />
+    <ClInclude Include="GTA\enums.hpp" />
+    <ClInclude Include="GTA\GTA.hpp" />
+    <ClInclude Include="GTA\Include.hpp" />
+    <ClInclude Include="GTA\Invoker\CrossMap.hpp" />
+    <ClInclude Include="GTA\Invoker\Invoker.hpp" />
+    <ClInclude Include="GTA\Invoker\Natives.hpp" />
+    <ClInclude Include="GTA\Invoker\NativeTypes.hpp" />
+    <ClInclude Include="GTA\Kicks.hpp" />
+    <ClInclude Include="GTA\ReplayInterface.hpp" />
+    <ClInclude Include="GTA\ScriptHandler.hpp" />
+    <ClInclude Include="GTA\Script\Script.hpp" />
+    <ClInclude Include="GTA\Script\ScriptFunction.hpp" />
+    <ClInclude Include="GTA\Script\ScriptGlobal.hpp" />
+    <ClInclude Include="GTA\Script\ScriptHook.hpp" />
+    <ClInclude Include="GTA\Script\ScriptLocal.hpp" />
+    <ClInclude Include="GTA\Script\ScriptManager.hpp" />
+    <ClInclude Include="GTA\Script\ScriptPatches.hpp" />
+    <ClInclude Include="GTA\Script\ScriptQueue.hpp" />
+    <ClInclude Include="GUI\Elements.hpp" />
+    <ClInclude Include="GUI\GUI.hpp" />
+    <ClInclude Include="GUI\Menu\Menu.hpp" />
+    <ClInclude Include="GUI\Overlays\Overlays.hpp" />
+    <ClInclude Include="GUI\Submenus\Submenus.hpp" />
+    <ClInclude Include="Hooking\DetourHook.hpp" />
+    <ClInclude Include="Hooking\Hooking.hpp" />
+    <ClInclude Include="Hooking\IATHook.hpp" />
+    <ClInclude Include="Hooking\IHook.hpp" />
+    <ClInclude Include="Hooking\NativeHooks.hpp" />
+    <ClInclude Include="Hooking\VMTHook.hpp" />
+    <ClInclude Include="Hooks\HookTable.hpp" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Logger\ExceptionHandler.hpp" />
+    <ClInclude Include="Logger\Logger.hpp" />
+    <ClInclude Include="Logger\StackTrace.hpp" />
+    <ClInclude Include="Memory\Batch.hpp" />
+    <ClInclude Include="Memory\BytePatch.hpp" />
+    <ClInclude Include="Memory\Declaration.hpp" />
+    <ClInclude Include="Memory\Handle.hpp" />
+    <ClInclude Include="Memory\Include.hpp" />
+    <ClInclude Include="Memory\Module.hpp" />
+    <ClInclude Include="Memory\Pattern.hpp" />
+    <ClInclude Include="Memory\Range.hpp" />
+    <ClInclude Include="Pointers\Pointers.hpp" />
+    <ClInclude Include="Renderer\Renderer.hpp" />
+    <ClInclude Include="Services\Friends\FriendsService.hpp" />
+    <ClInclude Include="Services\Players\PlayerService.hpp" />
+    <ClInclude Include="Services\Players\PlayerStruct.hpp" />
+    <ClInclude Include="Services\ScriptPatcher\ScriptData.hpp" />
+    <ClInclude Include="Services\ScriptPatcher\ScriptPatch.hpp" />
+    <ClInclude Include="Services\ScriptPatcher\ScriptPatcher.hpp" />
+    <ClInclude Include="Utility\All.hpp" />
+    <ClInclude Include="Utility\Entities.hpp" />
+    <ClInclude Include="Utility\Joaat.hpp" />
+    <ClInclude Include="Utility\Lists.hpp" />
+    <ClInclude Include="Utility\Local.hpp" />
+    <ClInclude Include="Utility\Math.hpp" />
+    <ClInclude Include="Utility\MinHook.hpp" />
+    <ClInclude Include="Utility\Mobile.hpp" />
+    <ClInclude Include="Utility\ModelInfo.hpp" />
+    <ClInclude Include="Utility\Obfuscation.hpp" />
+    <ClInclude Include="Utility\Target.hpp" />
+    <ClInclude Include="Utility\System.hpp" />
+    <ClInclude Include="Utility\Teleport.hpp" />
+    <ClInclude Include="Utility\Timer.hpp" />
+    <ClInclude Include="Utility\VehicleSpawner.hpp" />
+    <ClInclude Include="Utility\Weapons.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="GTA\Invoker\InvokerSpoof.asm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>
